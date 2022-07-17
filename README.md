@@ -45,7 +45,7 @@ pip install -r requirements.txt
 heroku git:remote -a herokudjangoapp
 heroku apps -a appName --tail
 heroku login -i
-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
+ghp_wq8VlPM66ziP7L8xQn5u6nvhuKhcwL3DBp
 
 
 git config --global user.name ""
@@ -196,5 +196,5 @@ def upload_result(request):
 </div>
 
 
-
+P8
 

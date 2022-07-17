@@ -808,7 +808,7 @@ overwritten when you update amCharts or plugin.
 We explained how you can define custom functions to be executed on click on
 export menu items.
 
-Those functions can tap into plugin's method to augment it with some custom
+Those functions can tap into plugin's methods to augment it with some custom
 functionality.
 
 Here's an example:
@@ -853,7 +853,7 @@ toImage | (object) options, (function) callback | Generates an image element whi
 ## Annotation API
 
 Since version 1.4.27 we've introduced the functionality to manage the annotations on the fly. The setter returns an array of objects, where each element represents an annotation.
-On the other hand the setter processes the given annotations within options (options.data). Both method support the reviver callback which allows you to modify the annotations if needed.
+On the other hand the setter processes the given annotations within options (options.data). Both methods support the reviver callback which allows you to modify the annotations if needed.
 
 Function | Parameters | Description
 -------- | ---------- | -----------
@@ -991,7 +991,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 * Fixed: Merged pull request [#84](https://github.com/amcharts/export/pull/54) fixing an issue when "a" is undefined within deepMerge (thanks to [RahavLussato](https://github.com/RahavLussato) )
 
 ### 1.4.56
-* Added: Dependency handler on export method, holds the actual call until the namespace shows up in current scope (uses libs.loadTimeout).
+* Added: Dependency handler on export methods, holds the actual call until the namespace shows up in current scope (uses libs.loadTimeout).
 
 ### 1.4.55
 * Added: Radial gradient issue on pie caused by the vertical gradient fix (v1.4.44)
