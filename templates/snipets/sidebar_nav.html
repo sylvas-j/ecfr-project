@@ -55,7 +55,6 @@
         <ul class="child-nav">
             {% if request.user.is_staff %}
             <li><a href="{% url 'hod:hod_create' %}"><i class="fa fa-bars"></i> <span>Add Hod</span></a></li>
-            <li><a href="{% url 'hod:hod_courses' %}"><i class="fa fa fa-server"></i> <span>Courses To Handled</span></a></li>
             {% endif %}
             <li><a href="{% url 'hod:hod_list' %}"><i class="fa fa fa-server"></i> <span>Manage Hod</span></a></li>
             

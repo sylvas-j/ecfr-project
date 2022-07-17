@@ -45,6 +45,7 @@ pip install -r requirements.txt
 heroku git:remote -a herokudjangoapp
 heroku apps -a appName --tail
 heroku login -i
+git push heroku master
 ghp_wq8VlPM66ziP7L8xQn5u6nvhuKhcwL3DBp
 
 
