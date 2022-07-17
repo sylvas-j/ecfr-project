@@ -7,7 +7,7 @@ import django_heroku
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','https://ecfr-rsu.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','https://ecfr-madonna.herokuapp.com/']
 
 
 # TEST/DEVELOPMENT REMOTE DATABASE
@@ -17,9 +17,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'db4free.net',
         'PORT': '3306',
-        'NAME': 'sn_rsu_db',
+        'NAME': 'ecfr_db',
         'USER': 'sn_test_user',
-        'PASSWORD': 'sn_test_user',
+        'PASSWORD': 'ecfr_test_user',
     },
 }
 
