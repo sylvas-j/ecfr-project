@@ -55,7 +55,7 @@ def index(request):
         else:
             context = {'message':'Invalid User Name and Password'}
             return render(request, 'index.html', context)
-    return render(request, 'index.html', {'name': 'ecfr', 'pass': 'ecfr@123'})
+    return render(request, 'index.html', {'name': 'ecfr,hodoffice,student', 'pass': 'Ecfr@123'})
 
 
 def verify_email_view(request):
