@@ -1,0 +1,53 @@
+
+{% if object_list %}
+
+    {% for object in object_list %}
+    <tr role="row" class="odd">
+        <td class="">{{ object.id }}</td>
+        <td>{{ object.hod }}</td>
+        <td>{{ object.mat_no }}</td>
+        <td>{{ object.hod_gender }}</td>
+        <td>{{ object.hod_date_of_birth }}</td>
+        <td>
+            {% if request.user.is_staff %}
+            <a href="{% url 'hod:hod_update' object.id %}" class="btn btn-primary"><i class="fa fa-edit" title="Edit Record"></i>
+            </a>
+            {% else %}
+            <a href="#" class="btn btn-primary"><i class="fa fa-edit disabled" title="Edit Record"></i>
+            </a>
+            {% endif %}
+
+        </td>
+    </tr>
+    {% endfor %}
+
+{% elif hod %}
+
+    {% for object in hod %}
+    <tr role="row" class="odd">
+        <td class="">{{ object.id }}</td>
+        <td>{{ object.mat_no }}</td>
+        <td>
+            <a href="{% url 'hod:hod_courses_list' object.id %}" class="btn btn-primary"><i class="fa fa-edit" title="Edit Record"></i>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+    {% for object in courses %}
+    <tr role="row" class="odd">
+        <td class="">{{ object.id }}</td>
+        <td>{{ object.courses__subject_name }} {{ object.courses__subject_code }}</td>
+        <td>
+            {% if request.user.is_staff %}
+            <a href="{% url 'hod:delete_course' object.id %}" class="btn btn-danger"><i class="fa fa-trash" title="Delete Record"></i>
+            </a>
+            {% else %}
+            <a href="#" class="btn btn-danger disabled"><i class="fa fa-trash" title="Delete Record"></i>
+            </a>
+            {% endif %}
+
+        </td>
+    </tr>
+    {% endfor %}
+{% endif %}

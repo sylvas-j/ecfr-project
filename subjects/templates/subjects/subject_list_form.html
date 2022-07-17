@@ -1,0 +1,38 @@
+{% block panel %}
+<div class="col-md-3"> </div>
+<div class="col-md-6">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h5>
+                    {% block panel_title %}
+                        List of courses
+                    {% endblock panel_title %}</h5>
+            </div>
+        </div>
+        <div class="panel-body p-20">
+            <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row ml-30">
+				<form method="post" enctype="application/x-www-form-urlencoded" id="formdata" data-url-course="{% url 'subjects:subject_reg' %}">{% csrf_token %}
+					<label for="success" class="control-label">Course Code</label>
+				    {% for object in object_list %}
+				    <div class="form-group has-success">
+				        <select id="selOption" name="selOption">
+				        	<option value="{{ object.id }}">{{ object.subject_name }} {{ object.subject_code }}</option>
+				        </select>
+
+				        <input type="checkbox" name="inputOption" id="inputOption">
+				    </div>
+				    <p></p>
+				    {% endfor %}
+				    <div class="has-success mt-5">
+			            <button type="button" name="submit" class="btn btn-success btn-labeled" id="reg-courses">Submit<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+				    </div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-3"> </div>
+{% endblock panel %}

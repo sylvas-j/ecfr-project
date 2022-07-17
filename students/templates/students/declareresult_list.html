@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block main_page_title %}
+{{ main_page_title }}
+{% endblock main_page_title %}
+
+{% block breadcumb %}
+<li><a href="{% url 'results:result_list' %}">{{ panel_name }}</a></li>
+<li class="active">{{ panel_title }}</li>
+{% endblock breadcumb %}
+
+{% block panel_title %}
+{{ panel_title }}
+{% endblock panel_title %}
+
+{% block panel %}
+
+{% if not result %}
+<div class="col-md-12" id="selectForm">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h5>{{ panel_title }}</h5>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="."
+                method="GET"
+                class="post-form col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto shadow d-flex flex-column
+                justify-content-center
+                align-items-center
+                bg-light
+                px-3 pt-3 pb-0"
+                id="ResultForm"
+                data-url="{% url 'students:result_display' %}"
+                novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="level"> Level:</label>
+                      {{form.level}}
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="section"> Section:</label>
+                      {{form.section}}
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="semester">Semester:</label>
+                      {{form.semester}}
+                </div>
+
+                <div class="ajax_load">
+                
+                <button type="button" id="check" 
+                  class="save btn btn-success rounded-0 shadow mt-2 mb-1">
+                  Check
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div id="result_display"></div>
+
+{% endblock panel %}
+
+
+{% block javascript_code %}
+<script>
+
+$("#check").click(function () {
+    var url = $("#ResultForm").attr("data-url");
+    // var paperAuthorId = $(this).val();
+    var level_id = $('#id_level').val();
+    var section_id = $('#id_section').val();
+    var semester_id = $('#id_semester').val();
+    // console.log('something '+level_id);
+    // console.log('something '+url);
+
+    $.ajax({
+      url: url,
+      data: {
+        level: level_id,
+        section: section_id,
+        semester: semester_id,
+      },
+      success: function (data) {
+        // console.log(data)
+        $("#result_display").html(data);
+      },
+    });
+  });
+
+</script>
+
+{% endblock javascript_code %}

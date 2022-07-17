@@ -1,0 +1,70 @@
+<div class="sidebar-nav">
+    <ul class="side-nav color-gray">
+        <li class="nav-header">
+            <span class="">Main Category</span>
+        </li>
+        <li>
+            {% if request.user.groups.all.0.name == 'students' %}
+            <a href="{% url 'students:student_edit' %}"><i class="fa fa-dashboard"></i> <span>User Profile</span> </a>
+            {% else %}
+            <a href="{% url 'hod:hod_edit' %}"><i class="fa fa-dashboard"></i> <span>User Profile</span> </a>
+            {% endif %}
+            <a href="{% url 'ecfr_admin:dashboard' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
+
+        </li>
+
+        <li class="nav-header">
+            <span class="">Appearance</span>
+        </li>
+
+        <li class="has-children">
+            <a href="{% url 'subjects:subject_list' %}"><i class="fa fa-file-text"></i> <span>Course(s)</span> <i class="fa fa-angle-right arrow"></i></a>
+            <ul class="child-nav">
+                {% if not request.user.groups.all.0.name == 'students' %}
+                <li><a href="{% url 'subjects:create_subject' %}"><i class="fa fa-bars"></i> <span>Create Course</span></a></li>
+                
+                <li><a href="{% url 'subjects:subject_list' %}"><i class="fa fa fa-server"></i> <span>Manage Course</span></a></li>
+                <li><a href="{% url 'subjects:subject_registered_list' %}"><i class="fa fa fa-server"></i> <span>Approve Courses</span></a></li>
+                {% elif request.user.groups.all.0.name == 'students' %}
+                <li><a href="{% url 'subjects:subject_list' %}"><i class="fa fa fa-server"></i> <span>Register Courses</span></a></li>
+                <li><a href="{% url 'subjects:subject_registered_list' %}"><i class="fa fa fa-server"></i> <span>Courses Registered</span></a></li>
+                {% endif %}
+
+                
+                
+            </ul>
+        </li>
+    
+    <!-- </li> -->
+    {% if not request.user.groups.all.0.name == 'students' %}
+    <li class="has-children">
+        <a href="{% url 'students:student_list' %}"><i class="fa fa-users"></i> <span>Student(s)</span> <i class="fa fa-angle-right arrow"></i></a>
+        <ul class="child-nav">
+            {% if request.user.is_staff %}
+            <li><a href="{% url 'students:student_create' %}"><i class="fa fa-bars"></i> <span>Add Student</span></a></li>
+            {% endif %}
+            <li><a href="{% url 'students:student_list' %}"><i class="fa fa fa-server"></i> <span>Manage Student</span></a></li>
+
+        </ul>
+    </li>
+    {% endif %}
+    
+    {% if request.user.groups.all.0.name == 'admin' %}
+    <li class="has-children">
+    <a href="{% url 'hod:hod_list' %}"><i class="fa fa-users"></i> <span>Hod(s)</span> <i class="fa fa-angle-right arrow"></i></a>
+        <ul class="child-nav">
+            {% if request.user.is_staff %}
+            <li><a href="{% url 'hod:hod_create' %}"><i class="fa fa-bars"></i> <span>Add Hod</span></a></li>
+            <li><a href="{% url 'hod:hod_courses' %}"><i class="fa fa fa-server"></i> <span>Courses To Handled</span></a></li>
+            {% endif %}
+            <li><a href="{% url 'hod:hod_list' %}"><i class="fa fa fa-server"></i> <span>Manage Hod</span></a></li>
+            
+            <li><a href="{% url 'hod:hod' %}"><i class="fa fa fa-server"></i> <span>Check Hod Courses</span></a></li>
+        </ul>
+    </li>
+    {% endif %}
+
+    <li><a href="{% url 'ecfr_admin:change_password' %}"><i class="fa fa fa-server"></i> <span>Change Password</span></a></li>
+
+    </li>
+</div>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block main_page_title %}
+{{ main_page_title }}
+{% endblock main_page_title %}
+
+{% block breadcumb %}
+<li><a href="{% url 'subjects:subject_list' %}">{{ panel_name }}</a></li>
+<li class="active">{{ panel_title }}</li>
+{% endblock breadcumb %}
+
+{% block panel_title %}
+{{ panel_title }}
+{% endblock panel_title %}
+
+{% block panel %}
+    {% if not request.user.groups.all.0.name == 'students' %}    
+        {% include 'includes/manage_panel_top.html' %}
+
+            {% include 'subjects/subject_list_table.html' %}
+
+        {% include 'includes/manage_panel_bottom.html' %}
+    {% else %}
+        
+        {% include 'subjects/subject_list_form.html' %}    
+    
+    {% endif %}
+{% endblock panel %}
+
+
+{% block javascript_code %}
+
+{% endblock javascript_code %}
