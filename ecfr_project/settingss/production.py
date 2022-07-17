@@ -18,7 +18,7 @@ DATABASES = {
         'HOST': 'db4free.net',
         'PORT': '3306',
         'NAME': 'ecfr_db',
-        'USER': 'sn_test_user',
+        'USER': 'ecfr_test_user',
         'PASSWORD': 'ecfr_test_user',
     },
 }
