@@ -87,7 +87,7 @@ $('#reg-courses').click((e)=>{
     data: {data:JSON.stringify(selOptionArray)},
     success: function (data) {
       // console.log(data)
-      console.log('checking output')
+      // console.log('checking output')
     },
   });
 
@@ -99,19 +99,20 @@ $("table").on('click','td','a', function (e) {
   var url = $('table').attr("data-url-course-status");
   console.log(e.target.id)
   console.log(url)
-  // $.ajax({
-  //   // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-  //   url: url,
-  //   data: {
-  //     q: qq,
-  //     action: type
-  //   },
-  //   success: function (data) {
-  //     // console.log(data);
-  //     // $("tbody").html();
-  //     // $("tbody").html(data);
-  //   },
-  // });
+  $.ajax({
+    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+    url: url,
+    // type:'POST',
+    data: {
+      course: JSON.stringify([courseId])
+    },
+    success: function (data) {
+      // console.log(data);
+      console.log('okk')
+      // $("tbody").html();
+      // $("tbody").html(data);
+    },
+  });
 });
 
 

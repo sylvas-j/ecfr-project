@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Subject, SubjectRegistered
@@ -102,44 +102,41 @@ class SubjectRegisteredDeleteView(LoginRequiredMixin, DeleteView):
 # Received data fron ajax api to register courses
 def subject_reg(request):
     if request.method != "POST":
-        data = request.GET['data']
-        # print(type(data))
-        data = data.strip('][').replace('"','').split(',')
-        for x in data:
-            # print(x)
-            course = get_object_or_404(Subject, pk=x)
-            print(course.id)
-            new_entry =[int(request.user.id),int(course.id),]
-            # check if course is already registered
-            compared_output = inf.compare_course_entry(request.user.id,course.id,new_entry)                        
-            if compared_output==0:
-                print('okiiiiiiii')
-                course_reg=SubjectRegistered.objects.create(student=request.user,subject=course)
+        if request.GET['data']:
+            data = request.GET['data']
+            # print(type(data))
+            data = data.strip('][').replace('"','').split(',')
+            for x in data:
+                # print(x)
+                course = get_object_or_404(Subject, pk=x)
+                print(course.id)
+                new_entry =[int(request.user.id),int(course.id),]
+                # check if course is already registered
+                compared_output = inf.compare_course_entry(request.user.id,course.id,new_entry)                        
+                if compared_output==0:
+                    print('okiiiiiiii')
+                    course_reg=SubjectRegistered.objects.create(student=request.user,subject=course)
 
-            messages.success(request, 'Courses registered')
+                # messages.success(request, 'Courses registered')
     else:
         print('someting')
     return render(request, 'subjects/subject_list_form.html', {'course':course})
 # {{ request.build_absolute_uri | safe }}
 
 def subject_status(request):
-    if request.method != "POST":
-        data = request.GET['data']
-        # print(type(data))
-        data = data.strip('][').replace('"','').split(',')
-        for x in data:
-            # print(x)
-            course = get_object_or_404(Subject, pk=x)
-            print(course.id)
-            new_entry =[int(request.user.id),int(course.id),]
-            # check if course is already registered
-            compared_output = inf.compare_course_entry(request.user.id,course.id,new_entry)                        
-            if compared_output==0:
-                print('okiiiiiiii')
-                course_reg=SubjectRegistered.objects.create(student=request.user,subject=course)
-
-            messages.success(request, 'Courses registered')
+    if request.method == "GET":
+        if request.GET['course']:
+            data = request.GET['course']
+            print(data)
+            data = data.strip('][').replace('"','').split('-')
+            if data[0] == 'approve':
+                course_status=SubjectRegistered.objects.filter(subject=data[1]).update(status='Approved')
+            else:
+                course_status=SubjectRegistered.objects.filter(subject=data[1]).update(status='Rejected')
+            print('e reach here')
+            messages.success(request, 'Status updated')
+            return redirect('subjects:subject_registered_list')
     else:
         print('someting')
-    return render(request, 'subjects/subject_list_form.html', {'course':course})
+        return render(request, 'subjects/subjectregistered_list.html')
 # {{ request.build_absolute_uri | safe }}
