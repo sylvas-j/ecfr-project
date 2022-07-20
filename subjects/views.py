@@ -5,6 +5,7 @@ from .models import Subject, SubjectRegistered
 from .forms import SubjectForm, SubjectRegisteredForm
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 import json
@@ -128,15 +129,21 @@ def subject_status(request):
         if request.GET['course']:
             data = request.GET['course']
             print(data)
+            feedback = {}
             data = data.strip('][').replace('"','').split('-')
             if data[0] == 'approve':
                 course_status=SubjectRegistered.objects.filter(subject=data[1]).update(status='Approved')
+                feedback['data'] = 'Approved'
             else:
                 course_status=SubjectRegistered.objects.filter(subject=data[1]).update(status='Rejected')
-            print('e reach here')
-            messages.success(request, 'Status updated')
-            return redirect('subjects:subject_registered_list')
+                feedback['data'] = 'Rejected'
+            
+            return JsonResponse(feedback)
     else:
         print('someting')
         return render(request, 'subjects/subjectregistered_list.html')
 # {{ request.build_absolute_uri | safe }}
+    #     return JsonResponse(data)
+    # subjects = None
+    # data['result'] = 'you made a request with empty data'
+    # return HttpResponse(json.dumps(data), content_type="application/json")

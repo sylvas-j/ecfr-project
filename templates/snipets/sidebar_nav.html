@@ -20,7 +20,7 @@
         <li class="has-children">
             <a href="{% url 'subjects:subject_list' %}"><i class="fa fa-file-text"></i> <span>Course(s)</span> <i class="fa fa-angle-right arrow"></i></a>
             <ul class="child-nav">
-                {% if not request.user.groups.all.0.name == 'students' %}
+                {% if request.user.groups.all.0.name == 'hod' %}
                 <li><a href="{% url 'subjects:create_subject' %}"><i class="fa fa-bars"></i> <span>Create Course</span></a></li>
                 
                 <li><a href="{% url 'subjects:subject_list' %}"><i class="fa fa fa-server"></i> <span>Manage Course</span></a></li>

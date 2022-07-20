@@ -20,7 +20,7 @@
     <td class="" id="{{ object.id }}">{{forloop.counter}}</td>
 
     <td>{{ object.subject }}</td>
-    <td>{{ object.status }}</td>
+    <td class="{{ object.id }}">{{ object.status }}</td>
     {% if request.user.groups.all.0.name == 'hod' %}
     <td>
         <a class="btn btn-primary" id="approve-{{ object.id }}"><i class="fa fa-edit" id="approve-{{ object.id }}" title="Approve"></i>

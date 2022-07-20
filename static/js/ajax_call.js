@@ -97,8 +97,9 @@ $('#reg-courses').click((e)=>{
 $("table").on('click','td','a', function (e) {
   var courseId = e.target.id
   var url = $('table').attr("data-url-course-status");
-  console.log(e.target.id)
-  console.log(url)
+  feedback = e.target.id.split('-')
+  // console.log(e.target.id.split('-'))
+  // console.log(url)
   $.ajax({
     // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
     url: url,
@@ -107,10 +108,9 @@ $("table").on('click','td','a', function (e) {
       course: JSON.stringify([courseId])
     },
     success: function (data) {
-      // console.log(data);
+      console.log(data.data);
       console.log('okk')
-      // $("tbody").html();
-      // $("tbody").html(data);
+      $('.'+feedback[1]).html(data.data);
     },
   });
 });
