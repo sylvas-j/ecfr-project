@@ -15,7 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # @login_required(login_url='admin_panels:login')
-@allowed_users(allowed_roles=['exam_n_record'])
+@allowed_users(allowed_roles=['admin'])
 @admin_only
 def hod_create(request):
     form = CreateUserForm()
@@ -38,7 +38,7 @@ def hod_create(request):
     return render(request, "hod/hod_form.html", context)
 
 
-@allowed_users(allowed_roles=['exam_n_record','hod','hod'])
+@allowed_users(allowed_roles=['admin','hod'])
 @login_required
 def hod_edit(request):
     hod = get_object_or_404(User, pk=request.user.id)
@@ -65,7 +65,7 @@ def hod_edit(request):
     return render(request, "hod/hod_form.html", context)
 
 
-@allowed_users(allowed_roles=['exam_n_record','hod','hod'])
+@allowed_users(allowed_roles=['admin','hod'])
 def hod_list(request):
     context={}
     field_list = [
@@ -85,7 +85,7 @@ def hod_list(request):
 
 
 @login_required
-@allowed_users(allowed_roles=['exam_n_record','hod','hod'])
+@allowed_users(allowed_roles=['admin','hod'])
 def hod_detail(request, pk):
     hod = get_object_or_404(Hod, pk=pk)
     if request.method == "POST":
@@ -121,7 +121,7 @@ def hod_detail(request, pk):
 #     return render(request, "hod/hod_form.html", context)
 
 
-@allowed_users(allowed_roles=['exam_n_record','hod','hod'])
+@allowed_users(allowed_roles=['admin','hod'])
 def hod(request):
     context={}
     field_list = [

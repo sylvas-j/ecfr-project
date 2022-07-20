@@ -1,4 +1,3 @@
-{% if not request.user.groups.all.0.name == 'students' %}
 <form method="post">{% csrf_token %}
 
     {% for field in form %}
@@ -48,6 +47,3 @@
         </div>
     </div>
 </form>
-{% else %}
-
-{% endif %}

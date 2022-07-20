@@ -108,8 +108,8 @@ $("table").on('click','td','a', function (e) {
       course: JSON.stringify([courseId])
     },
     success: function (data) {
-      console.log(data.data);
-      console.log('okk')
+      // console.log(data.data);
+      // console.log('okk')
       $('.'+feedback[1]).html(data.data);
     },
   });

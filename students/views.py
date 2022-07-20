@@ -88,7 +88,7 @@ def student_edit(request):
     st_details = get_object_or_404(Student, student=request.user.id)
     form = UpdateUserForm(instance=student)
     sec_form = StudentForm(instance=st_details)
-    
+    # print('jjjjjjjjjjjjjjj')
     if request.method == 'POST':
         form = UpdateUserForm(request.POST, instance=student)
         sec_form = StudentForm(request.POST, instance=st_details)
@@ -105,7 +105,7 @@ def student_edit(request):
         'panel_name':'Students',
         'panel_title':'Update Student'
         }
-    return render(request, "hod/hod_form.html", context)
+    return render(request, "students/student_form.html", context)
 
 
 
