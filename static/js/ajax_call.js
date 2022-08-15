@@ -88,6 +88,8 @@ $('#reg-courses').click((e)=>{
     success: function (data) {
       // console.log(data)
       // console.log('checking output')
+      alert('Courses Registered')
+      location.reload()
     },
   });
 

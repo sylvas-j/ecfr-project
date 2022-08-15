@@ -8,26 +8,23 @@ from .models import Student
 from .forms import StudentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-# Create your views here.
-from hod.models import Hod
-# from results.models import Results
-# from results.forms import CheckResultForm
 
-from subjects.models import Subject
+
+from subjects.models import Subject,SubjectRegistered
 # from helpers import inner_functions as inf
 from helpers.decorators import verify_email, unauthenticated_user, allowed_users, admin_only
 from hod.forms import UpdateUserForm
 
 
 class DashboardView(LoginRequiredMixin,TemplateView):
-    template_name = "dashboard.html"
+    template_name = "students/dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        context['cls'] = Hod.objects.count()
-        # context['results'] = Results.objects.count()
         context['students'] = Student.objects.count()
-        context['subjects'] = Subject.objects.count()
+        context['approved'] = SubjectRegistered.objects.filter(student=self.request.user, status='Approved').count()
+        context['rejected'] = SubjectRegistered.objects.filter(student=self.request.user, status='Rejected').count()
+        context['pending'] = SubjectRegistered.objects.filter(student=self.request.user, status='Pending').count()
         return context
 
 

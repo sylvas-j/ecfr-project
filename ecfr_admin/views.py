@@ -43,14 +43,10 @@ def index(request):
             if request.user.groups.exists():
                 group = request.user.groups.all()[0].name
 
-            if group == 'admin':
-                return redirect('ecfr_admin:dashboard')
-            elif group == 'hod':
-                return redirect('ecfr_admin:dashboard')
-            # elif group == 'hod':
-            #     return redirect('ecfr_admin:dashboard')
-            else:
+            if group == 'students':
                 return redirect('students:dashboard')
+            else:
+                return redirect('ecfr_admin:dashboard')
             # return redirect('ecfr_admin:dashboard')
         else:
             context = {'message':'Invalid User Name and Password'}

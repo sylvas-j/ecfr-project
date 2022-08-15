@@ -8,46 +8,39 @@
 
 {% block main_page_content %}
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat bg-primary" href="{% url 'students:student_list' %}">
-    
-                <span class="number counter">{{ students }}</span>
-                <span class="name">Regd Studets</span>
-                <span class="bg-icon"><i class="fa fa-users"></i></span>
-            </a>
-            <!-- /.dashboard-stat -->
-        </div>
+
         <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
     
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat bg-success" href="{% url 'subjects:subject_list' %}">
+                <span class="number counter">{{ approved }}</span>
+                <span class="name">Courses Approved</span>
+                <span class="bg-icon"><i class="fa fa-ticket"></i></span>
+            </a>
+            <!-- /.dashboard-stat -->
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <a class="dashboard-stat bg-danger" href="{% url 'subjects:subject_list' %}">
-                <span class="number counter">{{ subjects }}</span>
-                <span class="name">Courses Listed</span>
+                <span class="number counter">{{ rejected }}</span>
+                <span class="name">Courses Rejected</span>
+                <span class="bg-icon"><i class="fa fa-ticket"></i></span>
+            </a>
+            <!-- /.dashboard-stat -->
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat bg-primary" href="{% url 'subjects:subject_list' %}">
+                <span class="number counter">{{ pending }}</span>
+                <span class="name">Courses Pending</span>
                 <span class="bg-icon"><i class="fa fa-ticket"></i></span>
             </a>
             <!-- /.dashboard-stat -->
         </div>
         <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
     
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat bg-warning" href="#">
-                <span class="number counter">{{ cls }}</span>
-                <span class="name">Hod</span>
-                <span class="bg-icon"><i class="fa fa-bank"></i></span>
-            </a>
-            <!-- /.dashboard-stat -->
-        </div>
+
         <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
     
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat bg-success" href="{% url 'results:result_list' %}">
-    
-                <span class="number counter">{{ results }}</span>
-                <span class="name">Results Declared</span>
-                <span class="bg-icon"><i class="fa fa-file-text"></i></span>
-            </a>
-            <!-- /.dashboard-stat -->
-        </div>
+
         <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
     
     </div>

@@ -6,10 +6,15 @@
         <li>
             {% if request.user.groups.all.0.name == 'students' %}
             <a href="{% url 'students:student_edit' %}"><i class="fa fa-dashboard"></i> <span>User Profile</span> </a>
-            {% else %}
+            <a href="{% url 'students:dashboard' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
+
+            {% elif request.user.groups.all.0.name == 'hod' %}
             <a href="{% url 'hod:hod_edit' %}"><i class="fa fa-dashboard"></i> <span>User Profile</span> </a>
-            {% endif %}
             <a href="{% url 'ecfr_admin:dashboard' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
+            {% else %}
+            <a href="{% url 'ecfr_admin:dashboard' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
+            {% endif %}
+            
 
         </li>
 

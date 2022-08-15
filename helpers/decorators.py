@@ -14,7 +14,13 @@ dev_prod_email = dev_prod_email()
 def unauthenticated_user(view_func):
 	def wrapper_func(request, *args, **kwargs):
 		if request.user.is_authenticated:
-			return redirect('ecfr_admin:dashboard')
+			group = None
+			if request.user.groups.exists():
+				group = request.user.groups.all()[0].name
+			if group == 'students':
+				return redirect('students:dashboard')
+			else:
+				return redirect('ecfr_admin:student/dashboard')
 		else:
 			return view_func(request, *args, **kwargs)
 

@@ -31,7 +31,7 @@ class SubjectListView(LoginRequiredMixin, ListView):
     ]
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['main_page_title'] = 'Manage Subjects'
+        context['main_page_title'] = 'Register Subjects'
         context['panel_name']   =   'Subjects'
         context['panel_title']  =   'View Subjects Info'
         context['field_list']   =   self.field_list
@@ -107,6 +107,7 @@ def subject_reg(request):
             data = request.GET['data']
             # print(type(data))
             data = data.strip('][').replace('"','').split(',')
+            #print(data)
             for x in data:
                 # print(x)
                 course = get_object_or_404(Subject, pk=x)
@@ -118,7 +119,8 @@ def subject_reg(request):
                     print('okiiiiiiii')
                     course_reg=SubjectRegistered.objects.create(student=request.user,subject=course)
 
-                # messages.success(request, 'Courses registered')
+        #return redirect('subjects:subject_list_form.html')        
+        # messages.success(request, 'Courses registered')
     else:
         print('someting')
     return render(request, 'subjects/subject_list_form.html', {'course':course})

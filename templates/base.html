@@ -47,7 +47,11 @@
                         <div class="row breadcrumb-div">
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
+                                    {% if request.user.groups.all.0.name == 'students' %}
+                                    <li><a href="{% url 'students:dashboard' %}"><i class="fa fa-home"></i> Home</a></li>
+                                    {% else %}
                                     <li><a href="{% url 'ecfr_admin:dashboard' %}"><i class="fa fa-home"></i> Home</a></li>
+                                    {% endif %}
                                     {% block breadcumb %}
         
                                     {% endblock breadcumb %}
