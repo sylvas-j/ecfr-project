@@ -87,7 +87,9 @@ $('#reg-courses').click((e)=>{
     data: {data:JSON.stringify(selOptionArray)},
     success: function (data) {
       // console.log(data)
-      console.log('checking output')
+      // console.log('checking output')
+      alert('Courses Registered')
+      location.reload()
     },
   });
 
@@ -97,21 +99,22 @@ $('#reg-courses').click((e)=>{
 $("table").on('click','td','a', function (e) {
   var courseId = e.target.id
   var url = $('table').attr("data-url-course-status");
-  console.log(e.target.id)
-  console.log(url)
-  // $.ajax({
-  //   // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-  //   url: url,
-  //   data: {
-  //     q: qq,
-  //     action: type
-  //   },
-  //   success: function (data) {
-  //     // console.log(data);
-  //     // $("tbody").html();
-  //     // $("tbody").html(data);
-  //   },
-  // });
+  feedback = e.target.id.split('-')
+  // console.log(e.target.id.split('-'))
+  // console.log(url)
+  $.ajax({
+    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+    url: url,
+    // type:'POST',
+    data: {
+      course: JSON.stringify([courseId])
+    },
+    success: function (data) {
+      // console.log(data.data);
+      // console.log('okk')
+      $('.'+feedback[1]).html(data.data);
+    },
+  });
 });
 
 
