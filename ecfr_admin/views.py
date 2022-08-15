@@ -11,22 +11,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import TemplateView, View
 from django.contrib.auth.models import User
 from django.db.models import Q
-
-# from results.models import Results, UploadResult
 # from django.http import JsonResponse
 from django.urls import reverse_lazy
-# from django.core import serializers
-# import json
 
 from helpers.decorators import verify_email, unauthenticated_user, allowed_users, admin_only
 from hod.models import Hod
-# from results.models import DeclareResult
-from subjects.models import Subject
+from subjects.models import Subject, SubjectRegistered
 from students.models import Student
-
-# @allowed_users(allowed_roles=['exam_n_record'])
-# @admin_only
-
 
 @unauthenticated_user
 def index(request):
@@ -83,6 +74,8 @@ class DashboardView(LoginRequiredMixin,TemplateView):
         # context['results'] = Results.objects.count()
         context['students'] = Student.objects.count()
         context['subjects'] = Subject.objects.count()
+        context['approved'] = SubjectRegistered.objects.filter(status='Approved').count()
+        context['pending'] = SubjectRegistered.objects.filter(status='Pending').count()
         return context
     
 class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
