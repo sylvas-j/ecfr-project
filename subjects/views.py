@@ -27,7 +27,7 @@ class SubjectCreateView(LoginRequiredMixin, CreateView):
 class SubjectListView(LoginRequiredMixin, ListView):
     model = Subject
     field_list = [
-        'Subject Name', 'Subject Code', 'Creation Date', 'Last Updated'
+        'Subject Name', 'Subject Code','Subject Unit', 'Level', 'Creation Date', 'Last Updated'
     ]
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -36,6 +36,25 @@ class SubjectListView(LoginRequiredMixin, ListView):
         context['panel_title']  =   'View Subjects Info'
         context['field_list']   =   self.field_list
         return context
+
+class SubjectList():
+    def subject_list(request):
+        if request.method == 'GET':
+            level = request.GET['level']
+            section = request.GET['section']
+            semester = request.GET['semester']
+            print('kkkkkkkk', level)
+            context={}
+            field_list = [
+                'Subject','Unit', 'Status',
+            ]
+            course_status=Subject.objects.filter(subject_level=level, subject_semester=semester)
+            context['field_list'] = field_list
+            context['object_list'] = course_status
+            return render(request, 'subjects/subject_list_form.html', context)
+
+
+
 
 class SubjectUpdateView(LoginRequiredMixin,UpdateView):
     model = Subject
@@ -56,6 +75,34 @@ class SubjectDeleteView(LoginRequiredMixin, DeleteView):
         context['panel_title'] = 'Delete Subject'
         return context
     
+
+class SubjectReg():
+    def subject_reg_status(request):
+        context={}
+        
+        context['reg_button'] = 'reg_button'
+        context['main_page_title'] = 'Course Registration Confirmation'
+        context['panel_name'] = 'Course Registration'
+        context['panel_title'] = 'Courses Registered'
+        return render(request, 'subjects/subjectregistered_list.html', context)
+
+
+    def subject_reg_status_checker(request):
+        if request.method == 'GET':
+            level = request.GET['level']
+            section = request.GET['section']
+            semester = request.GET['semester']
+
+            context={}
+            field_list = [
+                'Subject','Unit', 'Status',
+            ]
+            course_status=SubjectRegistered.objects.filter(student=request.user, subject__subject_level=level, subject__subject_semester=semester)
+            context['field_list'] = field_list
+            context['object_list'] = course_status
+            return render(request, 'subjects/subjectregistered_section.html', context)
+
+
 class SubjectRegisteredCreateView(LoginRequiredMixin, CreateView):
     model = SubjectRegistered
     form_class = SubjectRegisteredForm
@@ -68,18 +115,6 @@ class SubjectRegisteredCreateView(LoginRequiredMixin, CreateView):
         context['panel_title'] = 'Create SubjectConbination'
         return context
 
-class SubjectRegisteredListView(LoginRequiredMixin, ListView):
-    model = SubjectRegistered
-    field_list = [
-        'Subject', 'Status',
-    ]
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['main_page_title'] = 'Check Courses Registered'
-        context['panel_name']   =   'Courses Registered'
-        context['panel_title']  =   'View Courses Registered Info'
-        context['field_list']   =   self.field_list
-        return context
 
 class SubjectRegisteredUpdateView(LoginRequiredMixin, UpdateView):
     model = SubjectRegistered
@@ -126,7 +161,7 @@ def subject_reg(request):
     return render(request, 'subjects/subject_list_form.html', {'course':course})
 # {{ request.build_absolute_uri | safe }}
 
-def subject_status(request):
+def subject_status_update(request):
     if request.method == "GET":
         if request.GET['course']:
             data = request.GET['course']

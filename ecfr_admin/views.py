@@ -9,7 +9,7 @@ from django.contrib.auth.views import PasswordChangeView
 # from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import TemplateView, View
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db.models import Q
 # from django.http import JsonResponse
 from django.urls import reverse_lazy
@@ -43,6 +43,36 @@ def index(request):
             context = {'message':'Invalid User Name and Password'}
             return render(request, 'index.html', context)
     return render(request, 'index.html', {'name': 'ecfr,hodoffice,student', 'pass': 'Ecfr@123'})
+
+
+@unauthenticated_user
+def signup(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        print("\nUser Name = ",username)
+        print("Password = ",password)
+        user = User.objects.values('id').filter(username=username)
+        
+        if not user:
+            userr = User.objects.create_user(username=username, password=password)
+            user = userr.id
+            group = Group.objects.get(name='students')
+            userr.groups.add(group)
+            st = Student.objects.create(student=userr)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            group = None
+            if request.user.groups.exists():
+                group = request.user.groups.all()[0].name
+            if group == 'students':
+                return redirect('students:dashboard')
+        else:
+            context = {'message':'Invalid User Name and Password'}
+            return render(request, 'index.html', context)
+    return render(request, 'signup.html')
+
 
 
 def verify_email_view(request):

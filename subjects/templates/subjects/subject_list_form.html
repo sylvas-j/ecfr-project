@@ -17,11 +17,11 @@
 					<label for="success" class="control-label">Course Code</label>
 				    {% for object in object_list %}
 				    <div class="form-group has-success">
-				        <select id="selOption" name="selOption">
-				        	<option value="{{ object.id }}">{{ object.subject_name }} {{ object.subject_code }}</option>
+				        <select id="selOption" name="selOption" class="form-control">
+				        	<option value="{{ object.id }}"> {{ object.subject_code }}</option>
 				        </select>
 
-				        <input type="checkbox" name="inputOption" id="inputOption">
+				        <input type="checkbox" name="inputOption" id="inputOption" class="form-control">
 				    </div>
 				    <p></p>
 				    {% endfor %}

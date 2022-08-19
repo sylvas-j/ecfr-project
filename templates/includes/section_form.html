@@ -1,0 +1,67 @@
+<div class="col-md-12" id="selectForm">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h5>Select Semester</h5>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="."
+                method="GET"
+                class="post-form col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto shadow d-flex flex-column
+                justify-content-center
+                align-items-center
+                bg-light
+                px-3 pt-3 pb-0"
+                id="ResultForm" 
+                data-url = "{% url 'subjects:subject_reg_status_checker'%}"
+                data-url-subject="{% url 'subjects:subject_user_list' %}"
+                novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="level"> Level:
+                  </label>
+                <select id="id_level" class="form-control">
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                    <option value="400">400</option>
+                    <option value="500">500</option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="section"> Section:
+                    </label>
+                <select id="id_section" class="form-control">
+                    <option value="2020/2021">2020/2021</option>
+                    <option value="2021/2022">2021/2022</option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="semester">Semester:</label>
+                <select id="id_semester" class="form-control">
+                    <option value="1">First Semester</option>
+                    <option value="2">Second Semester</option>
+                </select>
+                </div>
+
+                <div class="ajax_load">
+                
+                
+                {% if reg_button %}
+                <button type="button" value="result_file" id="check" name="result_list_file" class="save btn btn-success rounded-0 shadow mt-2 mb-1">
+                  Check
+                </button>
+                {% else %}
+                <button type="button" id="check"
+                  class="save btn btn-success rounded-0 shadow mt-2 mb-1">
+                  List Courses
+                </button>
+                {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

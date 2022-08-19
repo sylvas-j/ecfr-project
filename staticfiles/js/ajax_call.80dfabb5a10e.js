@@ -6,7 +6,7 @@ document.addEventListener("readystatechange", (event) => {
 
 $("#check").click(function () {
     var url = $("#ResultForm").attr("data-url");
-    var url_list = $("#ResultForm").attr("data-url-subject");
+    var url_file = $("#ResultForm").attr("data-url-file");
     // var paperAuthorId = $(this).val();
     var level_id = $('#id_level').val();
     var section_id = $('#id_section').val();
@@ -16,25 +16,6 @@ $("#check").click(function () {
 // This student detail to check their results
     if (check_file=='') {
         console.log('is empty');
-        $.ajax({
-          url: url_list,
-          data: {
-            level: level_id,
-            section: section_id,
-            semester: semester_id,
-          },
-          success: function (data) {
-            // console.log(data)
-            // $("#selectForm").hide();
-            $("#tableContainer").show();
-            $("#tableContainer").html(data);
-            reg_course();
-          },
-        });
-    }else{
-
-// This pull out results files for download
-        console.log('is not enmpty');
         $.ajax({
           url: url,
           data: {
@@ -47,7 +28,26 @@ $("#check").click(function () {
             // $("#selectForm").hide();
             $("#tableContainer").show();
             $("#tableContainer").html(data);
-            // src_after_file_ajax()
+            src_after_file_ajax()
+          },
+        });
+    }else{
+
+// This pull out results files for download
+        console.log('is not enmpty');
+        $.ajax({
+          url: url_file,
+          data: {
+            level: level_id,
+            section: section_id,
+            semester: semester_id,
+          },
+          success: function (data) {
+            // console.log(data)
+            // $("#selectForm").hide();
+            $("#tableContainer").show();
+            $("#tableContainer").html(data);
+            src_after_file_ajax()
           },
         });
     };
@@ -55,18 +55,16 @@ $("#check").click(function () {
 
 
 
-function reg_course(){
-  $('#reg-courses').click((e)=>{
+
+$('#reg-courses').click((e)=>{
   e.preventDefault();
-  const formElement = document.querySelector("form#formdata");
+  const formElement = document.querySelector("form");
   // var formData = new FormData(formElement);
   // var formData = new FormData();
   var selOption = formElement.selOption;
   var inputOption = formElement.inputOption;
   var checkLenght = inputOption.length;
   var selOptionArray = [];
-  console.log(inputOption);
-  console.log(inputOption.length);
 
   for(var i=0; i<checkLenght; i++){
     if (inputOption[i].checked) {
@@ -80,7 +78,7 @@ function reg_course(){
   // console.log(formData.getAll('selOption'))
   // const values = [...formData.entries()];
   // console.log(values);
-  var url_file = $('form#formdata').attr("data-url-course");
+  var url_file = $('form').attr("data-url-course");
   console.log(url_file)
 
   $.ajax({
@@ -96,8 +94,6 @@ function reg_course(){
   });
 
 });
-
-}
 
 
 $("table").on('click','td','a', function (e) {

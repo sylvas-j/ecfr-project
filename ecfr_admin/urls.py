@@ -8,5 +8,6 @@ urlpatterns = [
     # path('find-result/', views.find_result_view, name='find_result'),
     path('change-password/', views.PasswordChangeView.as_view(), name='change_password'),
     path('search/table/', views.search_table, name='search_table'),
+    path('signup/', views.signup, name='signup'),
     path('logout', views.logoutUser, name='logout'),
 ]

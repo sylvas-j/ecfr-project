@@ -7,8 +7,29 @@ from django.conf import settings
 # Create your models here.
 
 class Subject(models.Model):
+    levels = (
+        ('100', '100'),
+        ('200', '200'),
+        ('300', '300'),
+        ('400', '400'),
+        ('500', '500'),
+    )
+    semesters = (
+        ('1', '1'),('2', '2'),('3', '3'),
+    )
+    sections = (
+        ('2020/2021', '2020/2021'),('2021/2022', '2021/2022'),
+        ('2022/2023', '2022/2023'),('2023/2024', '2023/2024'),
+        ('2024/2025', '2024/2025'),
+    )
+
+    subject_section = models.CharField(max_length=9, null=True, choices=sections)
     subject_name = models.CharField(max_length=100)
     subject_code = models.CharField(max_length=20)
+    subject_unit = models.CharField(max_length=2)
+    subject_level = models.CharField(max_length=3, null=True, choices=levels)
+    subject_semester = models.CharField(max_length=3, null=True, choices=semesters)
+    
     subject_creation_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     subject_update_date = models.DateTimeField(auto_now=True, auto_now_add=False)
 

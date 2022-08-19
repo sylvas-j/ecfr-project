@@ -21,8 +21,12 @@
 
         {% include 'includes/manage_panel_bottom.html' %}
     {% else %}
-        
-        {% include 'subjects/subject_list_form.html' %}    
+
+        {% include 'includes/section_form.html' %} 
+        <div id="tableContainer">
+            {% include 'subjects/subject_list_form.html' %}  
+        </div>
+          
     
     {% endif %}
 {% endblock panel %}
