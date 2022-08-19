@@ -18,7 +18,7 @@ $("#check").click(function () {
     if (check_file=='check_courses') {
         console.log('is check_courses');
         $.ajax({
-          url: url_list,
+          url: url,
           data: {
             level: level_id,
             section: section_id,
@@ -53,7 +53,7 @@ $("#check").click(function () {
 // This enable studdents to register their courses 
         console.log('is not enmpty');
         $.ajax({
-          url: url,
+          url: url_list,
           data: {
             level: level_id,
             section: section_id,

@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block main_page_title %}
@@ -13,37 +14,11 @@
 {{ panel_title }}
 {% endblock panel_title %}
 
+
 {% block panel %}
 
-{% include 'includes/manage_panel_top.html' %}
 
-{% for object in object_list %}
-<tr role="row" class="odd">
-    <td class="" id="{{ object.id }}">{{forloop.counter}}</td>
+    {% include 'subjects/subjectregistered_section_list.html' %}
 
-    <td>{{ object.subject }}</td>
-    <td>{{ object.subject.subject_unit }}</td>
-    <td class="{{ object.id }}">{{ object.status }}</td>
-
-    {% if request.user.groups.all.0.name == 'hod' %}
-    <td>
-        <a class="btn btn-primary" id="approve-{{ object.id }}"><i class="fa fa-edit" id="approve-{{ object.id }}" title="Approve"></i>
-        </a>
-
-        <a class="btn btn-danger" id="reject-{{ object.id }}"><i class="fa fa-trash" id="reject-{{ object.id }}" title="Reject"></i>
-        </a>
-    </td>
-    {% else %}
-    <td>
-        <a href="{% url 'subjects:subject_registered_update' object.id %}" class="btn btn-primary disabled"><i class="fa fa-edit" title="Edit Record"></i>
-        </a>
-        <a href="{% url 'subjects:subject_registered_delete' object.id %}" class="btn btn-danger disabled"><i class="fa fa-trash" title="Delete Record"></i>
-        </a>
-    </td>
-    {% endif %}
-</tr>
-{% endfor %}
-
-{% include 'includes/manage_panel_bottom.html' %}
 
 {% endblock panel %}

@@ -22,7 +22,7 @@ class HodForm(forms.ModelForm):
     class Meta:
         model = Hod
         fields = '__all__'
-        exclude = ['hod_reg','active']
+        exclude = ['hod','hod_reg','active']
         widgets = {
             'mat_no'  :   forms.TextInput(attrs={'class':'form-control'}),
             'hod_gender'  :   forms.Select(attrs={'class':'form-control'}),

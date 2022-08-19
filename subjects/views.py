@@ -116,7 +116,7 @@ class SubjectReg():
             course_status=SubjectRegistered.objects.filter(student=request.user, subject__subject_level=level, subject__subject_semester=semester)
             context['field_list'] = field_list
             context['object_list'] = course_status
-            return render(request, 'subjects/subjectregistered_section.html', context)
+            return render(request, 'subjects/subjectregistered_section_list.html', context)
 
 
 class SubjectRegisteredCreateView(LoginRequiredMixin, CreateView):
