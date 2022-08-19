@@ -16,6 +16,7 @@
                 id="ResultForm" 
                 data-url = "{% url 'subjects:subject_reg_status_checker'%}"
                 data-url-subject="{% url 'subjects:subject_user_list' %}"
+                data-url-student="{% url 'students:student_list' %}"
                 novalidate>
                 {% csrf_token %}
                 <div class="form-group">
@@ -48,16 +49,21 @@
 
                 <div class="ajax_load">
                 
-                
-                {% if reg_button %}
-                <button type="button" value="result_file" id="check" name="result_list_file" class="save btn btn-success rounded-0 shadow mt-2 mb-1">
-                  Check
-                </button>
+                {% if request.user.groups.all.0.name == 'students' %}
+                    {% if reg_button %}
+                    <button type="button" value="check_courses" id="check" name="result_list_file" class="save btn btn-success rounded-0 shadow mt-2 mb-1">
+                      Check
+                    </button>
+                    {% else %}
+                    <button type="button" id="check"
+                      class="save btn btn-success rounded-0 shadow mt-2 mb-1">
+                      List Courses
+                    </button>
+                    {% endif %}
                 {% else %}
-                <button type="button" id="check"
-                  class="save btn btn-success rounded-0 shadow mt-2 mb-1">
-                  List Courses
-                </button>
+                    <button type="button" value="student_courses" id="check" name="result_list_file" class="save btn btn-success rounded-0 shadow mt-2 mb-1">
+                      Check Courses Status
+                    </button>
                 {% endif %}
                 </div>
             </form>

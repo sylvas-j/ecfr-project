@@ -53,6 +53,22 @@ class SubjectList():
             context['object_list'] = course_status
             return render(request, 'subjects/subject_list_form.html', context)
 
+    def subject_student_list(request, pk):
+        if request.method == 'GET':
+            print('kkkkkkkk')
+            context={}
+            field_list = [
+                'Subject','Unit', 'Status',
+            ]
+            # course_status = get_object_or_404(SubjectRegistered, pk=pk)
+            course_status=SubjectRegistered.objects.filter(student=pk)
+            context['main_page_title'] = 'Course Registration Confirmation'
+            context['panel_name'] = 'Course Registration'
+            context['panel_title'] = 'Approve/Reject Courses'
+            context['field_list'] = field_list
+            context['object_list'] = course_status
+            return render(request, 'subjects/subjectregistered_section.html', context)
+
 
 
 
@@ -151,7 +167,7 @@ def subject_reg(request):
                 # check if course is already registered
                 compared_output = inf.compare_course_entry(request.user.id,course.id,new_entry)                        
                 if compared_output==0:
-                    print('okiiiiiiii')
+                    # print('okiiiiiiii')
                     course_reg=SubjectRegistered.objects.create(student=request.user,subject=course)
 
         #return redirect('subjects:subject_list_form.html')        

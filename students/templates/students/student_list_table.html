@@ -1,3 +1,5 @@
+{% include 'includes/manage_panel_top.html' %}
+
 {% for object in object_list %}
 <tr role="row" class="odd">
     <td class="">{{ object.id }}</td>
@@ -7,18 +9,27 @@
     <td>{{ object.student_level }}</td>
     <td>{{ object.student_date_of_birth }}</td>
     <td>
-        {% if not request.user.groups.all.0.name == 'students' %}
-        <a href="{% url 'students:student_update' object.id %}" class="btn btn-primary"><i class="fa fa-edit" title="Edit Record"></i>
-        </a>
-        <a href="{% url 'students:student_delete' object.id %}" class="btn btn-danger"><i class="fa fa-trash" title="Delete Record"></i>
-        </a>
+        {% if not students_list %}
+            {% if not request.user.groups.all.0.name == 'students' %}
+            <a href="{% url 'students:student_update' object.id %}" class="btn btn-primary"><i class="fa fa-edit" title="Edit Record"></i>
+            </a>
+            <a href="{% url 'students:student_delete' object.id %}" class="btn btn-danger"><i class="fa fa-trash" title="Delete Record"></i>
+            </a>
+            {% else %}
+            <a href="#" class="btn btn-primary disabled"><i class="fa fa-edit" title="Edit Record"></i>
+            </a>
+            <a href="#" class="btn btn-danger disabled"><i class="fa fa-trash" title="Delete Record"></i>
+            </a>
+            {% endif %}
         {% else %}
-        <a href="#" class="btn btn-primary disabled"><i class="fa fa-edit" title="Edit Record"></i>
-        </a>
-        <a href="#" class="btn btn-danger disabled"><i class="fa fa-trash" title="Delete Record"></i>
-        </a>
+            <a href="{% url 'subjects:subject_student_list' object.student_id %}" class="btn btn-primary"><i class="fa fa-edit" title="Approve Courses"></i>
+            </a>
+            <a href="#" class="btn btn-danger disabled"><i class="fa fa-trash" title="Delete Record"></i>
+            </a>
         {% endif %}
 
     </td>
 </tr>
 {% endfor %}
+
+{% include 'includes/manage_panel_bottom.html' %}

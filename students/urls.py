@@ -10,7 +10,8 @@ app_name = 'students'
 
 urlpatterns = [
     path('dashboard', DashboardView.as_view(), name='dashboard'),
-    path('', StudentListView.as_view(), name='student_list'),
+    # path('', StudentListView.as_view(), name='student_list'),
+    path('', views.StudentList.student_list, name='student_list'),
     path('create/', StudentCreateView.as_view(), name='student_create'),
     path('update/<int:pk>', StudentUpdateView.as_view(), name='student_update'),
     

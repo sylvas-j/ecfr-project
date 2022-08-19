@@ -1,3 +1,20 @@
+{% extends 'base.html' %}
+
+{% block main_page_title %}
+{{ main_page_title }}
+{% endblock main_page_title %}
+
+{% block breadcumb %}
+<li><a href="{% url 'subjects:subject_registered_list' %}">{{ panel_name }}</a></li>
+<li class="active">{{ panel_title }}</li>
+{% endblock breadcumb %}
+
+{% block panel_title %}
+{{ panel_title }}
+{% endblock panel_title %}
+
+{% block panel %}
+
 {% include 'includes/manage_panel_top.html' %}
 
 {% for object in object_list %}
@@ -28,3 +45,5 @@
 {% endfor %}
 
 {% include 'includes/manage_panel_bottom.html' %}
+
+{% endblock panel %}
