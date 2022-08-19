@@ -46,8 +46,9 @@ heroku git:remote -a herokudjangoapp
 heroku apps -a appName --tail
 heroku login -i
 git push heroku master
+heroku run python manage.py migrate
 ghp_wq8VlPM66ziP7L8xQn5u6nvhuKhcwL3DBp
-
+ghp_5W3dIwKHMpMyQM6zJZfx5iKCcQpv9L0MOR
 
 git config --global user.name ""
 git config --global user.email ""
@@ -74,5 +75,5 @@ git config --global --unset credential.helper
 
 
 
-P8
+hY
 
