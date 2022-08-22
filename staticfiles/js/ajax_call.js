@@ -7,17 +7,18 @@ document.addEventListener("readystatechange", (event) => {
 $("#check").click(function () {
     var url = $("#ResultForm").attr("data-url");
     var url_list = $("#ResultForm").attr("data-url-subject");
+    var url_student_list = $("#ResultForm").attr("data-url-student");
     // var paperAuthorId = $(this).val();
     var level_id = $('#id_level').val();
     var section_id = $('#id_section').val();
     var semester_id = $('#id_semester').val();
     var check_file = $('button').val()
 
-// This student detail to check their results
-    if (check_file=='') {
-        console.log('is empty');
+// The student can check their registered courses
+    if (check_file=='check_courses') {
+        console.log('is check_courses');
         $.ajax({
-          url: url_list,
+          url: url,
           data: {
             level: level_id,
             section: section_id,
@@ -31,12 +32,28 @@ $("#check").click(function () {
             reg_course();
           },
         });
+    }else if (check_file=='student_courses') {
+        console.log('is student_courses');
+        $.ajax({
+          url: url_student_list,
+          data: {
+            level: level_id,
+            section: section_id,
+            semester: semester_id,
+          },
+          success: function (data) {
+            // console.log(data)
+            // $("#selectForm").hide();
+            $("#tableContainer").show();
+            $("#tableContainer").html(data);
+            // to_approve();
+          },
+        });
     }else{
-
-// This pull out results files for download
+// This enable studdents to register their courses 
         console.log('is not enmpty');
         $.ajax({
-          url: url,
+          url: url_list,
           data: {
             level: level_id,
             section: section_id,
@@ -88,8 +105,6 @@ function reg_course(){
     // type:'POST',
     data: {data:JSON.stringify(selOptionArray)},
     success: function (data) {
-      // console.log(data)
-      // console.log('checking output')
       alert('Courses Registered')
       location.reload()
     },
@@ -100,12 +115,34 @@ function reg_course(){
 }
 
 
+// function to_approvePP(){
+//   $("table").on('click','td','a', function (e) {
+//     var courseId = e.target.id
+//     var url = $('table').attr("data-url-to-approve");
+//     feedback = e.target.id
+//     console.log(e.target.id)
+//     $.ajax({
+//       // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+//       url: url,
+//       // type:'POST',
+//       data: {
+//         course: JSON.stringify([courseId])
+//       },
+//       success: function (data) {
+//         console.log(data);
+//         $('.'+feedback[1]).html(data.data);
+//       },
+//     });
+
+//   });
+// }
+
+// This captures checkbox status during student course registration
 $("table").on('click','td','a', function (e) {
   var courseId = e.target.id
   var url = $('table').attr("data-url-course-status");
   feedback = e.target.id.split('-')
   // console.log(e.target.id.split('-'))
-  // console.log(url)
   $.ajax({
     // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
     url: url,
@@ -115,10 +152,8 @@ $("table").on('click','td','a', function (e) {
     },
     success: function (data) {
       // console.log(data.data);
-      // console.log('okk')
       $('.'+feedback[1]).html(data.data);
     },
   });
 });
-
 
