@@ -33,6 +33,7 @@ $("#check").click(function () {
           },
         });
     }else if (check_file=='student_courses') {
+// HOD can check the list of registered students
         console.log('is student_courses');
         $.ajax({
           url: url_student_list,
