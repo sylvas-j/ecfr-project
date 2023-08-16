@@ -4,12 +4,12 @@
 __pycache__
 
 # Env
-.env
+# .env
 myvenv/
 venv/
 
 # Database
-db.sqlite3
+# db.sqlite3
 
 bin
 
