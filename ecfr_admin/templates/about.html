@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block main_wrapper %}
+
+<div class="row">
+<!-- <h1 align="center" style="color: #2d1dd1;"> Madonna University, Nigeria</h1> -->
+<h1 align="center">Electronic Course Form Registration</h1>
+
+<div class="col-lg-12">
+<section class="section">
+<div class="row mt-40">
+    <div class="col-md-10 col-md-offset-1 pt-25">
+      <p>ECFR is design to manage student course registration</p>
+      <p>The system has three privileges</p>
+      <ul>
+        <li>
+          Admin(exam and record): this is responsible for approving student registered courses.
+          <br>
+          And adding and managing courses on the system.
+        </li>
+        <li>
+          HOD: this is responsible for choosing whom will serve as an admin.
+          <br>
+          And it also have a read-only access to the admin activities.
+        </li>
+        <li>
+          Students: this enable students to submit courses for approval.
+          <br>
+          And check registered courses.
+        </li>
+      </ul>
+        <!-- /.row -->
+    </div>
+    <!-- /.col-md-12 -->
+</div>
+<!-- /.row -->
+</section>
+  <a href="{% url 'home' %}" class="pull-right mr-50">
+    <button type="button" name="home" class="btn btn-info btn-labeled">
+        Home
+    </button>
+  </a>  
+</div>
+<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+
+{% endblock main_wrapper %}
