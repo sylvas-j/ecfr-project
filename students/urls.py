@@ -18,6 +18,6 @@ urlpatterns = [
     # path('list/', views.result_list, name='result_list'),
     # path('courses/list/', views.subject_list, name='subject_list'),
     # path('display/', views.result_display, name='result_display'),
-    path('details/edit/', views.student_edit, name='student_edit'),
+    path('details/edit', views.student_edit, name='student_edit'),
     path('delete/<int:pk>', StudentDeleteView.as_view(), name='student_delete'),
 ]

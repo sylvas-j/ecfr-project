@@ -91,6 +91,9 @@ def logoutUser(request):
     return redirect('home')
 
 
+def about(request):
+    return render(request,'about.html')
+
 # from django.contrib.auth.decorators import login_required
 
 # @unauthenticated_user

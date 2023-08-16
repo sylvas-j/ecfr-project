@@ -50,7 +50,7 @@ def admin_only(view_func):
 		if group == 'hod':
 			return redirect('ecfr_admin:dashboard')
 
-		if group == 'exam_n_record':
+		if group == 'admin':
 			return view_func(request, *args, **kwargs)
 
 	return wrapper_function
@@ -79,7 +79,7 @@ def verify_email(view_func):
 				if request.user.email:
 					mail = send_mail(
 					'Email Testing', # subject
-					'Click here to verify your account > https://ecfr-rsu.herokuapp.com/verify/email/?mat='+str(mat_no)+'/&type='+str(user_type), # body
+					'Click here to verify your account > https://devarchive.org/ecfr/verify/email/?mat='+str(mat_no)+'/&type='+str(user_type), # body
 					'noreply@newworldjournals.com', # from
 					[request.user.email], #['devarchive2020@gmail.com'],  to
 					fail_silently = False,

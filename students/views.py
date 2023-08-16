@@ -52,22 +52,23 @@ class StudentListView(LoginRequiredMixin, ListView):
         context['field_list']   =   self.field_list
         return context
 
+# @allowed_users(allowed_roles=['admin','hod'])
 class StudentList():
     def student_list(request):
         if request.method == 'GET':
-            level = request.GET['level']
-            section = request.GET['section']
-            semester = request.GET['semester']
-            print('kkkkkkkk', level)
+            # level = request.GET['level']
+            # section = request.GET['section']
+            # semester = request.GET['semester']
+            # print('kkkkkkkk', level)
             context={}
             field_list = [
                 'Student Name','Mat No.', 'Class Name','Level','DoB'
             ]
-            course_status=Student.objects.filter(student_level=level)
+            course_status=Student.objects.filter(student_level=100)
             context['field_list'] = field_list
             context['object_list'] = course_status
             context['students_list'] = 'course_status'
-            return render(request, 'students/student_list_table.html', context)
+            return render(request, 'students/student_list.html', context)
 
 
 class StudentUpdateView(LoginRequiredMixin, UpdateView):
@@ -114,14 +115,13 @@ def student_edit(request):
             username = request.user         
             messages.success(request, 'Account was updated for ' + str(username))
             return redirect('students:dashboard')
-    context = {'form':form,
+    context = {
+        'form':form,
         'sec_form':sec_form,
         'main_page_title':'Update Student',
         'panel_name':'Students',
         'panel_title':'Update Student'
         }
     return render(request, "students/student_form.html", context)
-
-
 
 

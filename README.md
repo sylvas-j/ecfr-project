@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 ❗❗❗❗
 
-
+cd Documents/things-n-thingses/python/web-stack/ecfr_project
 # cd documents/python_scripts/ecfr_project
 # cd ../../users/sylvanus jerome/documents/python_scripts/ecfr_project
 heroku git:remote -a herokudjangoapp
@@ -74,6 +74,5 @@ git config --global --unset credential.helper
 
 
 
-
-hY
+docker exec -it ecfr-con-web bash
 

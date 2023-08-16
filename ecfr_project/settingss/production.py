@@ -1,36 +1,63 @@
 from .common import *
 ###############
 ## configuration for heroku
-import dj_database_url
-import django_heroku
+# import dj_database_url
+# import django_heroku
 ####################
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','https://ecfr-madonna.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 
-# TEST/DEVELOPMENT REMOTE DATABASE
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8383',
+    'http://devarchive.org',
+    'https://devarchive.org',
+    'http://www.devarchive.org',
+    'https://www.devarchive.org',
+    'http://devarchive.org:8383',
+    'http://www.devarchive.org:8383',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8383',
+    'http://devarchive.org',
+    'https://devarchive.org',
+    'http://www.devarchive.org',
+    'https://www.devarchive.org',
+    'http://devarchive.org:8383',
+    'http://www.devarchive.org:8383',
+]
+
+# DATABASES = {
+#     # 'default': {},
+#     'default': {
+#         'ENGINE': os.environ.get('MYSQL_ENGINE'),
+#         'NAME': os.environ.get('MYSQL_DATABASE'),
+#         'USER': os.environ.get('MYSQL_USER'),
+#         'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+#         'HOST': os.environ.get('MYSQL_HOST'),
+#         'PORT': os.environ.get('MYSQL_PORT'),
+#         'OPTIONS': {
+#             'auth_plugin': 'mysql_native_password'
+#         }
+
+#     },
+# }
+
 DATABASES = {
-    # 'default': {},
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'db4free.net',
-        'PORT': '3306',
-        'NAME': 'ecfr_db',
-        'USER': 'ecfr_test_user',
-        'PASSWORD': 'ecfr_test_user',
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
+# django_heroku.settings(locals())
+# django_heroku.settings(config=locals(), staticfiles=False,logging=False)
 
-
-
-django_heroku.settings(locals())
-django_heroku.settings(config=locals(), staticfiles=False,logging=False)
-
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
+# prod_db  =  dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(prod_db)
 
 # # settings.py
 # AUTHENTICATION_BACKENDS = (
@@ -43,8 +70,8 @@ DATABASES['default'].update(prod_db)
 
 # configuration for heroku
 ##################
-ADMINS = (('Webmaster','sylvanusjerome@gmail.com'))
-MANAGERS = ADMINS
+# ADMINS = (('Webmaster','sylvanusjerome@gmail.com'))
+# MANAGERS = ADMINS
 
 
 EMAIL_HOST = 'smtp.mailtrap.io'

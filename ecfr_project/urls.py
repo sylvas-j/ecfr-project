@@ -24,15 +24,15 @@ from ecfr_admin import views
 # admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='home'),
-    path('verify/email/', views.verify_email_view, name='verify_email'),
-    path('dashboard/', include('ecfr_admin.urls')),
-    path('subject/', include('subjects.urls')),
-    path('student/', include('students.urls')),
-    path('hod/', include('hod.urls')),
+    path('ecfr/admin/', admin.site.urls),
+    path('ecfr/', views.index, name='home'),
+    path('ecfr/verify/email/', views.verify_email_view, name='verify_email'),
+    path('ecfr/dashboard/', include('ecfr_admin.urls')),
+    path('ecfr/subject/', include('subjects.urls')),
+    path('ecfr/student/', include('students.urls')),
+    path('ecfr/hod/', include('hod.urls')),
     # path('result/', include('results.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('ecfr/accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
