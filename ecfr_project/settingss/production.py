@@ -11,6 +11,7 @@ ALLOWED_HOSTS = ['*']
 
 
 CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
     'http://localhost:8383',
     'http://devarchive.org',
     'https://devarchive.org',
@@ -21,6 +22,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
     'http://localhost:8383',
     'http://devarchive.org',
     'https://devarchive.org',
@@ -53,30 +55,7 @@ DATABASES = {
     }
 }
 
-# django_heroku.settings(locals())
-# django_heroku.settings(config=locals(), staticfiles=False,logging=False)
-
-# prod_db  =  dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(prod_db)
-
-# # settings.py
-# AUTHENTICATION_BACKENDS = (
-#     'admin_panels.backends.EmailBackend',
-#     )
-
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# configuration for heroku
-##################
-# ADMINS = (('Webmaster','sylvanusjerome@gmail.com'))
-# MANAGERS = ADMINS
-
-
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = 'ba7606b4e3166d'
-EMAIL_HOST_PASSWORD = 'd561301a16f63b'
-EMAIL_PORT = '2525'
-# 465
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
