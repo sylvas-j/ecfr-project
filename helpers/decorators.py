@@ -20,7 +20,7 @@ def unauthenticated_user(view_func):
 			if group == 'students':
 				return redirect('students:dashboard')
 			else:
-				return redirect('ecfr_admin:student/dashboard')
+				return redirect('ecfr_admin:dashboard')
 		else:
 			return view_func(request, *args, **kwargs)
 
